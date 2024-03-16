@@ -38,10 +38,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 // createAsyncThunk is middleware to perform async side-effects or operations
-export const getAllData = createAsyncThunk("gitUser", async () => {
-  const res = await fetch("https://api.github.com/users");
-  const result = await res.json();
-  return result;
+export const getAllData = createAsyncThunk("gitUser", async (args , {rejectWithValue}) => {
+    try{
+        const res = await fetch("https://api.github.com/users");
+        const result = await res.json();
+        return result;
+    }catch(error){
+        return rejectWithValue("Something went wrong", error);
+    }
 });
 
 export const gitUser = createSlice({
@@ -52,7 +56,7 @@ export const gitUser = createSlice({
     error: null,
   },
   reducers: {},
-  
+
   extraReducers: (builder) => {
     builder
       .addCase(getAllData.pending, (state) => {
