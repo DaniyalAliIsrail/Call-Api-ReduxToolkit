@@ -5,5 +5,6 @@ import  gitUser  from "../feature/gituserSlice";
 export const store = configureStore({
   reducer: {
     app : gitUser,
+    
   },
 });

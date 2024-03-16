@@ -52,6 +52,7 @@ export const gitUser = createSlice({
     error: null,
   },
   reducers: {},
+  
   extraReducers: (builder) => {
     builder
       .addCase(getAllData.pending, (state) => {
